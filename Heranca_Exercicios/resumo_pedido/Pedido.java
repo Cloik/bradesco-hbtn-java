@@ -16,13 +16,28 @@ public class Pedido {
         return percentualDesconto;
     }
 
-    public double calcularTotal(){
-        double total = 0.0;
-        for(ItemPedido item : itens){
-            total += item.getQuantidade() * item.getProduto().obterPrecoLiquido();
+    public double calcularTotal() {
+        BigDecimal total = BigDecimal.ZERO;
+
+        for (ItemPedido item : itens) {
+            BigDecimal preco = BigDecimal.valueOf(item.getProduto().obterPrecoLiquido())
+                    .setScale(2, RoundingMode.HALF_UP);
+
+            BigDecimal quantidade = BigDecimal.valueOf(item.getQuantidade());
+            BigDecimal totalItem = preco.multiply(quantidade)
+                    .setScale(2, RoundingMode.HALF_UP);
+
+            total = total.add(totalItem);
         }
-        total -= total * (percentualDesconto / 100.0);
-        return total;
+
+        BigDecimal desconto = total
+                .multiply(BigDecimal.valueOf(percentualDesconto).divide(BigDecimal.valueOf(100)))
+                .setScale(2, RoundingMode.HALF_UP);
+
+        BigDecimal totalFinal = total.subtract(desconto)
+                .setScale(2, RoundingMode.HALF_UP);
+
+        return totalFinal.doubleValue();
     }
 
     public void apresentarResumoPedido() {
