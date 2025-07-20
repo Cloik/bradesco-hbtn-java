@@ -1,3 +1,5 @@
+import produtos.Livro;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.NumberFormat;
@@ -17,25 +19,27 @@ public class Pedido {
     }
 
     public double calcularTotal() {
-        BigDecimal total = BigDecimal.ZERO;
+        BigDecimal totalProdutos = BigDecimal.ZERO;
 
         for (ItemPedido item : itens) {
             BigDecimal preco = BigDecimal.valueOf(item.getProduto().obterPrecoLiquido())
-                    .setScale(2, RoundingMode.HALF_UP);
+                    .setScale(2, RoundingMode.DOWN);
 
             BigDecimal quantidade = BigDecimal.valueOf(item.getQuantidade());
             BigDecimal totalItem = preco.multiply(quantidade)
-                    .setScale(2, RoundingMode.HALF_UP);
+                    .setScale(2, RoundingMode.DOWN);
 
-            total = total.add(totalItem);
+            totalProdutos = totalProdutos.add(totalItem).setScale(2, RoundingMode.DOWN);
         }
 
-        BigDecimal desconto = total
-                .multiply(BigDecimal.valueOf(percentualDesconto).divide(BigDecimal.valueOf(100)))
-                .setScale(2, RoundingMode.HALF_UP);
+        BigDecimal taxaDesconto = BigDecimal.valueOf(percentualDesconto)
+                .divide(BigDecimal.valueOf(100), 4, RoundingMode.DOWN);
 
-        BigDecimal totalFinal = total.subtract(desconto)
-                .setScale(2, RoundingMode.HALF_UP);
+        BigDecimal desconto = totalProdutos.multiply(taxaDesconto)
+                .setScale(2, RoundingMode.DOWN);
+
+        BigDecimal totalFinal = totalProdutos.subtract(desconto)
+                .setScale(2, RoundingMode.DOWN);
 
         return totalFinal.doubleValue();
     }
@@ -45,47 +49,50 @@ public class Pedido {
         NumberFormat formato = NumberFormat.getNumberInstance(Locale.getDefault());
         formato.setMinimumFractionDigits(2);
         formato.setMaximumFractionDigits(2);
-        formato.setRoundingMode(RoundingMode.HALF_UP);
+        formato.setRoundingMode(RoundingMode.DOWN);
 
         System.out.println("------- RESUMO PEDIDO -------");
+
         BigDecimal totalProdutos = BigDecimal.ZERO;
 
         for (ItemPedido item : itens) {
-            String tipo = item.getProduto() instanceof produtos.Livro ? "Livro" : "Dvd";
+            String tipo = item.getProduto() instanceof Livro ? "Livro" : "Dvd";
             String titulo = item.getProduto().getTitulo();
 
-            BigDecimal preco = BigDecimal.valueOf(item.getProduto().obterPrecoLiquido())
+            BigDecimal precoUnitario = BigDecimal.valueOf(item.getProduto().obterPrecoLiquido())
                     .setScale(2, RoundingMode.HALF_UP);
 
-            int quantidade = item.getQuantidade();
-
-            BigDecimal totalItem = preco.multiply(BigDecimal.valueOf(quantidade))
+            BigDecimal quantidade = BigDecimal.valueOf(item.getQuantidade());
+            BigDecimal totalItem = precoUnitario.multiply(quantidade)
                     .setScale(2, RoundingMode.HALF_UP);
 
-            totalProdutos = totalProdutos.add(totalItem);
+            totalProdutos = totalProdutos.add(totalItem).setScale(2, RoundingMode.HALF_UP);
 
             System.out.printf("Tipo: %s  Titulo: %s  Preco: %s  Quant: %d  Total: %s\n",
                     tipo,
                     titulo,
-                    formato.format(preco.doubleValue()),
-                    quantidade,
+                    formato.format(precoUnitario.doubleValue()),
+                    item.getQuantidade(),
                     formato.format(totalItem.doubleValue()));
         }
 
         System.out.println("----------------------------");
 
-        BigDecimal valorDesconto = totalProdutos
-                .multiply(BigDecimal.valueOf(percentualDesconto).divide(BigDecimal.valueOf(100)))
+        BigDecimal taxaDesconto = BigDecimal.valueOf(percentualDesconto)
+                .divide(BigDecimal.valueOf(100), 4, RoundingMode.HALF_UP);
+
+        BigDecimal desconto = totalProdutos.multiply(taxaDesconto)
                 .setScale(2, RoundingMode.HALF_UP);
 
-        BigDecimal totalPedido = totalProdutos.subtract(valorDesconto)
+        BigDecimal totalPedido = totalProdutos.subtract(desconto)
                 .setScale(2, RoundingMode.HALF_UP);
 
-        System.out.println("DESCONTO: " + formato.format(valorDesconto.doubleValue()));
+        System.out.println("DESCONTO: " + formato.format(desconto.doubleValue()));
         System.out.println("TOTAL PRODUTOS: " + formato.format(totalProdutos.doubleValue()));
         System.out.println("----------------------------");
         System.out.println("TOTAL PEDIDO: " + formato.format(totalPedido.doubleValue()));
         System.out.println("----------------------------");
     }
+
 
 }

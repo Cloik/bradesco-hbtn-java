@@ -1,4 +1,6 @@
 package produtos;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public class Livro extends Produto {
     private int paginas;
@@ -26,6 +28,9 @@ public class Livro extends Produto {
 
     @Override
     public double obterPrecoLiquido() {
-        return getPrecoBruto() * 1.15;
+        return BigDecimal.valueOf(getPrecoBruto())
+                .multiply(BigDecimal.valueOf(1.15))
+                .setScale(2, RoundingMode.DOWN)
+                .doubleValue();
     }
 }
