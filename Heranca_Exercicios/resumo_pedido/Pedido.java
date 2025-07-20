@@ -1,5 +1,3 @@
-import produtos.Livro;
-
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.NumberFormat;
@@ -38,7 +36,7 @@ public class Pedido {
         BigDecimal totalProdutos = BigDecimal.ZERO;
 
         for (ItemPedido item : itens) {
-            String tipo = item.getProduto() instanceof Livro ? "Livro" : "Dvd";
+            String tipo = item.getProduto() instanceof produtos.Livro ? "Livro" : "Dvd";
             String titulo = item.getProduto().getTitulo();
 
             BigDecimal preco = BigDecimal.valueOf(item.getProduto().obterPrecoLiquido())
