@@ -1,3 +1,5 @@
+package Heranca_Exercicios.resumo_pedido;
+
 import java.util.Locale;
 
 public class Program {

@@ -1,5 +1,7 @@
+
 import produtos.Livro;
 
+import java.math.RoundingMode;
 import java.text.NumberFormat;
 import java.util.Locale;
 
@@ -26,10 +28,10 @@ public class Pedido {
     }
 
     public void apresentarResumoPedido() {
-        Locale.setDefault(new Locale("pt", "BR"));
-        NumberFormat formato = NumberFormat.getNumberInstance(Locale.getDefault());
+        NumberFormat formato = NumberFormat.getNumberInstance(new Locale("pt", "BR"));
         formato.setMinimumFractionDigits(2);
         formato.setMaximumFractionDigits(2);
+        formato.setRoundingMode(RoundingMode.HALF_UP);
 
         System.out.println("------- RESUMO PEDIDO -------");
         double totalProdutos = 0.0;
