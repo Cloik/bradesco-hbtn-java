@@ -1,6 +1,4 @@
 package produtos;
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 
 public class Dvd extends Produto {
     private String diretor;
@@ -28,9 +26,6 @@ public class Dvd extends Produto {
 
     @Override
     public double obterPrecoLiquido() {
-        return BigDecimal.valueOf(getPrecoBruto())
-                .multiply(BigDecimal.valueOf(1.20))
-                .setScale(2, RoundingMode.DOWN)
-                .doubleValue();
+        return getPrecoBruto() * 1.20;
     }
 }
