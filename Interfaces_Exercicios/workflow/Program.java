@@ -1,3 +1,5 @@
+import atividades.Atividade;
+
 public class Program {
     public static void main(String[] args) {
         MaquinaWorkflow maquinaWorkflow = new MaquinaWorkflow();
