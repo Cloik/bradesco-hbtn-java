@@ -1,4 +1,7 @@
-import atividades.Atividade;
+import atividades.CarregarVideo;
+import atividades.CodificarVideo;
+import atividades.EnviarEmail;
+import atividades.ModificarStatusVideo;
 
 public class Program {
     public static void main(String[] args) {
@@ -16,7 +19,7 @@ public class Program {
 
         Workflow workflowVideos = new Workflow();
 
-        workflowVideos.registrarAtividade(new CarregarVideo());
+        workflowVideos.registrarAtividade(new atividades.CarregarVideo());
         workflowVideos.registrarAtividade(new EnviarEmail());
 
         maquinaWorkflow.executar(workflowVideos);

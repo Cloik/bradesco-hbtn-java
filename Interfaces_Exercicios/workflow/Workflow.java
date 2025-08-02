@@ -1,4 +1,3 @@
-
 import atividades.Atividade;
 
 import java.util.ArrayList;
