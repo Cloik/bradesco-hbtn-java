@@ -40,7 +40,7 @@ public class Livro {
 
     public void setPreco(double preco) throws LivroInvalidoException{
         if(preco <= 0){
-            throw new LivroInvalidoException("Titulo de livro invalido");
+            throw new LivroInvalidoException("Preco de livro invalido");
         }
         this.preco = preco;
     }
