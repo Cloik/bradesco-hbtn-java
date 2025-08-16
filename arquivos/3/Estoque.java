@@ -82,7 +82,6 @@ public class Estoque {
         }
         if (atualizado) {
             salvarEstoque();
-            System.out.println("Quantidade atualizada com sucesso.");
         } else {
             System.out.println("Produto com ID " + id + " não encontrado.");
         }
