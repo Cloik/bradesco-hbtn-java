@@ -9,7 +9,6 @@ public class CsvFileReader {
         String linha;
 
         try(BufferedReader buffer = new BufferedReader(new FileReader(arquivo))){
-//            buffer.readLine(); //Ignora o cabeçalho
 
             while((linha = buffer.readLine()) != null){
                 if(linha.trim().isEmpty()){ //Ignora as linhas em branco
