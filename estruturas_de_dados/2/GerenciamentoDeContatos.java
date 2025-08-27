@@ -16,7 +16,7 @@ public class GerenciamentoDeContatos {
     // Adiciona um novo contato
     public void adicionarContato(String nome, String telefone, String email) {
         if (contatos.containsKey(nome)) {
-            System.out.println("Erro: Contato com nome " + nome + " já existe!");
+            System.out.println("Erro: estruturas_de_dados.Contato com nome " + nome + " já existe!");
             return;
         }
 
@@ -33,7 +33,7 @@ public class GerenciamentoDeContatos {
         novoContato.adicionarEmail(email);
 
         contatos.put(nome, novoContato);
-        System.out.println("Contato " + nome + " adicionado com sucesso!");
+        System.out.println("estruturas_de_dados.Contato " + nome + " adicionado com sucesso!");
     }
 
 
@@ -53,10 +53,10 @@ public class GerenciamentoDeContatos {
     public void buscarContato(String nome) {
         Contato contato = contatos.get(nome);
         if (contato != null) {
-            System.out.println("Contato encontrado: " + nome);
+            System.out.println("estruturas_de_dados.Contato encontrado: " + nome);
             contato.exibirContato();
         } else {
-            System.out.println("Contato " + nome + " não encontrado.");
+            System.out.println("estruturas_de_dados.Contato " + nome + " não encontrado.");
         }
     }
 
@@ -65,9 +65,9 @@ public class GerenciamentoDeContatos {
     public void removerContato(String nome) {
         Contato contatoRemovido = contatos.remove(nome);
         if (contatoRemovido != null) {
-            System.out.println("Contato " + nome + " removido com sucesso!");
+            System.out.println("estruturas_de_dados.Contato " + nome + " removido com sucesso!");
         } else {
-            System.out.println("Contato " + nome + " não encontrado.");
+            System.out.println("estruturas_de_dados.Contato " + nome + " não encontrado.");
         }
     }
 
@@ -84,27 +84,27 @@ public class GerenciamentoDeContatos {
 
 
         // Exibindo todos os contatos
-        System.out.println("\n\nExibindo todos os contatos:");
+        System.out.println("\nExibindo todos os contatos:");
         gestao.exibirContatos();
 
 
         // Buscando um contato
-        System.out.println("\n\nBuscando contato 'Maria':");
+        System.out.println("\nBuscando contato 'Maria':");
         gestao.buscarContato("Maria");
 
 
         // Removendo um contato
-        System.out.println("\n\nRemovendo contato 'Carlos':");
+        System.out.println("\nRemovendo contato 'Carlos':");
         gestao.removerContato("Carlos");
 
 
         // Tentando remover um contato inexistente
-        System.out.println("\n\nTentando remover contato 'João' que não existe:");
+        System.out.println("\nTentando remover contato 'João' que não existe:");
         gestao.removerContato("João");
 
 
         // Exibindo todos os contatos após remoções
-        System.out.println("\n\nExibindo todos os contatos após remoções:");
+        System.out.println("\nExibindo todos os contatos após remoções:");
         gestao.exibirContatos();
     }
 }
