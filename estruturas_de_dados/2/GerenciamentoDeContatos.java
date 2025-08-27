@@ -1,4 +1,3 @@
-package estruturas_de_dados;
 
 import java.util.HashMap;
 import java.util.Map;
