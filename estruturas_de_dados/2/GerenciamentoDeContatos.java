@@ -1,4 +1,3 @@
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,7 +15,7 @@ public class GerenciamentoDeContatos {
     // Adiciona um novo contato
     public void adicionarContato(String nome, String telefone, String email) {
         if (contatos.containsKey(nome)) {
-            System.out.println("Erro: estruturas_de_dados.Contato com nome " + nome + " já existe!");
+            System.out.println("Erro: Contato com nome " + nome + " já existe!");
             return;
         }
 
@@ -33,7 +32,7 @@ public class GerenciamentoDeContatos {
         novoContato.adicionarEmail(email);
 
         contatos.put(nome, novoContato);
-        System.out.println("estruturas_de_dados.Contato " + nome + " adicionado com sucesso!");
+        System.out.println("Contato " + nome + " adicionado com sucesso!");
     }
 
 
@@ -53,10 +52,10 @@ public class GerenciamentoDeContatos {
     public void buscarContato(String nome) {
         Contato contato = contatos.get(nome);
         if (contato != null) {
-            System.out.println("estruturas_de_dados.Contato encontrado: " + nome);
+            System.out.println("Contato encontrado: " + nome);
             contato.exibirContato();
         } else {
-            System.out.println("estruturas_de_dados.Contato " + nome + " não encontrado.");
+            System.out.println("Contato " + nome + " não encontrado.");
         }
     }
 
@@ -65,9 +64,9 @@ public class GerenciamentoDeContatos {
     public void removerContato(String nome) {
         Contato contatoRemovido = contatos.remove(nome);
         if (contatoRemovido != null) {
-            System.out.println("estruturas_de_dados.Contato " + nome + " removido com sucesso!");
+            System.out.println("Contato " + nome + " removido com sucesso!");
         } else {
-            System.out.println("estruturas_de_dados.Contato " + nome + " não encontrado.");
+            System.out.println("Contato " + nome + " não encontrado.");
         }
     }
 
