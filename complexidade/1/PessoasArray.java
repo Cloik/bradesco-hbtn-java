@@ -21,13 +21,18 @@ public class PessoasArray {
     // implementar o metodo de buscaLinear
     public void buscaLinear(String nome) {
         System.out.println("Procurando pelo nome: \"" + nome + "\"");
+        boolean encontrado = false;
+
         for (int i = 0; i < nomes.length; i++) {
             System.out.println("Passando pelo indice:" + i);
-            if (nomes[i].equals(nome)) {
+            if (nomes[i].equals(nome) && !encontrado) {
                 System.out.println("Nome pesquisado é " + nome + " que está na posição " + i);
-                return;
+                encontrado = true;
             }
         }
-        throw new IllegalArgumentException("O nome " + nome + " não se encontra no array de nomes");
+
+        if (!encontrado) {
+            throw new IllegalArgumentException("O nome " + nome + " não se encontra no array de nomes");
+        }
     }
 }
