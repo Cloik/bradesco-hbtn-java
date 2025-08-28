@@ -1,4 +1,3 @@
-package complexidade;
 
 public class Program {
 
