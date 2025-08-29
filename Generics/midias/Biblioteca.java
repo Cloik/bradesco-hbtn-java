@@ -1,16 +1,17 @@
+package Generics.midias;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Biblioteca <T> {
+public class Biblioteca <T extends Midia> {
 
-    List<T> listaBiblioteca = new ArrayList<>();
+    private List<T> midias = new ArrayList<>();
 
-    public void adicionarMidia(T value){
-        listaBiblioteca.add(value);
+    public void adicionarMidia(T midia){
+        midias.add(midia);
     }
 
     public List<T> obterListaMidias(){
-        return listaBiblioteca;
+        return midias;
     }
 }

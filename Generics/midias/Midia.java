@@ -1,13 +1,14 @@
+package Generics.midias;
 
 public class Midia {
     private String nome;
 
-    public String getNome() {
-        return nome;
+    public Midia(String nome) {
+        this.nome = nome;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public String getNome() {
+        return nome;
     }
 
     @Override
