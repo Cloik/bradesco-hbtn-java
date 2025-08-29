@@ -1,4 +1,3 @@
-package Generics.midias;
 
 import java.util.ArrayList;
 import java.util.List;

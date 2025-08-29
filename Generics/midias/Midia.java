@@ -1,4 +1,3 @@
-package Generics.midias;
 
 public class Midia {
     private String nome;
