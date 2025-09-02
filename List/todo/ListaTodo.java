@@ -40,7 +40,7 @@ public class ListaTodo {
 
     public void fazerTodas (){
         for (Tarefa t : tarefas) {
-            t.desfazer();
+            t.marcarFeita();
         }
     }
 
