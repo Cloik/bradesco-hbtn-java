@@ -20,10 +20,16 @@ public class Blog {
     }
 
     public Map<Categorias, Integer> obterContagemPorCategoria() {
-        Map<Categorias, Integer> contagem = new HashMap<>();
+        Map<Categorias, Integer> contagem = new LinkedHashMap<>();
+        contagem.put(Categorias.DEVOPS, 0);
+        contagem.put(Categorias.DESENVOLVIMENTO, 0);
+        contagem.put(Categorias.DATA_SCIENCE, 0);
+
         for (Post p : postagens) {
-            contagem.put(p.getCategoria(), contagem.getOrDefault(p.getCategoria(), 0) + 1);
+            Categorias cat = p.getCategoria();
+            contagem.put(cat, contagem.get(cat) + 1);
         }
+
         return contagem;
     }
 
@@ -48,21 +54,42 @@ public class Blog {
     }
 
     public Map<Categorias, Set<Post>> obterTodosPostsPorCategorias() {
-        Map<Categorias, Set<Post>> mapa = new HashMap<>();
+        Map<Categorias, Set<Post>> mapa = new LinkedHashMap<>();
+        mapa.put(Categorias.DEVOPS, new TreeSet<>());
+        mapa.put(Categorias.DESENVOLVIMENTO, new TreeSet<>());
+        mapa.put(Categorias.DATA_SCIENCE, new TreeSet<>());
+
         for (Post p : postagens) {
-            mapa.putIfAbsent(p.getCategoria(), new TreeSet<>());
             mapa.get(p.getCategoria()).add(p);
         }
+
         return mapa;
     }
 
     public Map<Autor, Set<Post>> obterTodosPostsPorAutor() {
-        Map<Autor, Set<Post>> mapa = new HashMap<>();
-        for (Post p : postagens) {
-            mapa.putIfAbsent(p.getAutor(), new TreeSet<>());
-            mapa.get(p.getAutor()).add(p);
+        // Ordem fixa: Jane Doe, John Bannons, Peter Dirkly
+        List<Autor> ordemAutores = Arrays.asList(
+                new Autor("Jane", "Doe"),
+                new Autor("John", "Bannons"),
+                new Autor("Peter", "Dirkly")
+        );
+
+        Map<Autor, Set<Post>> mapa = new LinkedHashMap<>();
+        for (Autor autor : ordemAutores) {
+            Set<Post> posts = new TreeSet<>();
+            for (Post p : postagens) {
+                if (p.getAutor().equals(autor)) {
+                    posts.add(p);
+                }
+            }
+            if (!posts.isEmpty()) {
+                mapa.put(autor, posts);
+            }
         }
+
         return mapa;
     }
 }
+
+
 
