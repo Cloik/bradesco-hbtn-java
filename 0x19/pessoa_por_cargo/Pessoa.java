@@ -1,4 +1,3 @@
-package pessoa_por_cargo;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
