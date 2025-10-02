@@ -1,3 +1,7 @@
+package pessoa_por_cargo;
+
+import java.util.*;
+import java.util.stream.Collectors;
 
 import java.util.*;
 import java.util.stream.Collectors;

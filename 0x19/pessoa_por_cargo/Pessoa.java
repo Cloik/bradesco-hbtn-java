@@ -1,3 +1,8 @@
+package pessoa_por_cargo;
+
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.util.Locale;
 
 public class Pessoa {
     private int codigo;
@@ -20,7 +25,11 @@ public class Pessoa {
 
     @Override
     public String toString() {
-        return String.format("[%d] %s %s %d R$ %.6f", codigo, nome, cargo, idade, salario);
+        DecimalFormatSymbols symbols = new DecimalFormatSymbols(new Locale("pt", "BR"));
+        symbols.setDecimalSeparator(',');
+        DecimalFormat df = new DecimalFormat("0.000000", symbols);
+        return String.format("[%d] %s %s %d R$ %s", codigo, nome, cargo, idade, df.format(salario));
     }
 }
+
 
