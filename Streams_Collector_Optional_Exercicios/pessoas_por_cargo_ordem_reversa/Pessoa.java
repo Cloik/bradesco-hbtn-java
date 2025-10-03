@@ -1,7 +1,7 @@
 
 import java.util.Objects;
 
-public class Pessoa implements Comparable<Pessoa> {
+public class Pessoa {
     private int codigo;
     private String nome;
     private String cargo;
@@ -16,18 +16,17 @@ public class Pessoa implements Comparable<Pessoa> {
         this.salario = salario;
     }
 
+    public int getCodigo() {
+        return codigo;
+    }
+
     public String getCargo() {
         return cargo;
     }
 
     @Override
     public String toString() {
-        return String.format("[%d] %s %s %d R$ %.6f", codigo, nome, cargo, idade, salario);
-    }
-
-    @Override
-    public int compareTo(Pessoa outra) {
-        return Integer.compare(this.codigo, outra.codigo);
+        return String.format("[%d] %s %s %d R$ %.6f", codigo, nome, cargo, idade, salario).replace('.', ',');
     }
 
     @Override
@@ -43,3 +42,10 @@ public class Pessoa implements Comparable<Pessoa> {
         return Objects.hash(codigo);
     }
 }
+
+
+
+
+
+
+
